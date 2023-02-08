@@ -12,7 +12,8 @@
 
 #include "server.h"
 
-int main (void) {
+int main (void)
+{
 	printf("Process ID: %i\n", getpid());
 	return 0;
 }

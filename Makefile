@@ -13,9 +13,9 @@ OBJS_DIR = ./s_obj/
 ############################################################################
 ################################## Bonus ###################################
 BONUS_NAME = client
-BONUS_FILE := 
+BONUS_FILE :=	main
 
-BONUS_DIR = ./client/
+BONUS_DIR = ./client_files/
 BONUS_OBJS_DIR = ./c_obj/
 
 ############################################################################
@@ -66,4 +66,4 @@ fclean: clean
 re: fclean all
 
 ################################## Phony ####################################
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re client
