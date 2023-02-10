@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/10 11:55:09 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:44:59 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ int main (int argv, char **argc)
 	for (int i = 0; data()->input_str[i]; i++) {
 		char_to_binary(data()->input_str[i]);
 		printf("%c = %s\n", data()->input_str[i], data()->binary_str);
+
+		for (int j = 0; data()->binary_str[j]; j++) {
+			if (data()->binary_str[j] == '0')
+				kill(data()->process_id, SIGUSR1);
+			else
+				kill(data()->process_id, SIGUSR2);
+
+			// Wait for PONG
+
+				
+		}
+		
 	}
 	
 
