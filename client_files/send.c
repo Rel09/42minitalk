@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   send.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/10 11:55:09 by dpotvin          ###   ########.fr       */
+/*   Created: 2023/02/10 11:31:25 by dpotvin           #+#    #+#             */
+/*   Updated: 2023/02/10 11:53:59 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-int main (int argv, char **argc)
+void char_to_binary(char c)
 {
-	if (!parser(argv, argc))
-		return (0);
-		
-	printf("Received PID:		%i\n", data()->process_id);
-	printf("Received String:	%s\n", data()->input_str);
+    int	i;
 	
-	
-	for (int i = 0; data()->input_str[i]; i++) {
-		char_to_binary(data()->input_str[i]);
-		printf("%c = %s\n", data()->input_str[i], data()->binary_str);
+	i = 0;
+	for (int j = 7; j >= 0; --j)
+    {
+        if (c & (1 << j))
+			data()->binary_str[i++] = '1';
+		else
+			data()->binary_str[i++] = '0';
 	}
-	
-
-	
-	/*
-	while (1) {
-		kill(get_data()->process_id, SIGUSR1);
-	}
-	*/
-	
-
-	return 0;
+	data()->binary_str[i] = '\0';
 }

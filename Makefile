@@ -13,7 +13,7 @@ OBJS_DIR = ./s_obj/
 ############################################################################
 ################################## Bonus ###################################
 BONUS_NAME = client
-BONUS_FILE :=	main
+BONUS_FILE :=	main parsing send
 
 BONUS_DIR = ./client_files/
 BONUS_OBJS_DIR = ./c_obj/
