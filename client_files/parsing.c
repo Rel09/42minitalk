@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:51:29 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/10 11:53:55 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/12 22:35:01 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ t_bool parser(int argv, char **argc) {
 		return false;
 	data()->process_id = ft_atoi(argc[1]);
 	data()->input_str = argc[2];
+	savepid(getpid());
 	return true;
 }

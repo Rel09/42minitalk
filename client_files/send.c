@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:31:25 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/10 11:53:59 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/12 22:35:09 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,15 @@ void char_to_binary(char c)
 			data()->binary_str[i++] = '0';
 	}
 	data()->binary_str[i] = '\0';
+}
+
+void	savepid(int num)
+{
+	data()->pidi = 9;
+	while (num > 9)
+	{
+		data()->clientpid[data()->pidi--] = (num % 10) + '0';
+		num /= 10;
+	}
+	data()->clientpid[data()->pidi] =  (num % 10) + '0';
 }

@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:10 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/10 15:47:17 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/12 22:42:33 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <signal.h>
 
+typedef struct _count {
+	int	count;
+}	t_size;
+
 typedef struct _data {
 	int				i;
 	char			str[100];
@@ -25,13 +29,19 @@ typedef struct _data {
 
 typedef struct _recv {
 	uint8_t i;
-	char	data[9];
+	char	data[10];
 }	t_recv;
 
 typedef struct _signal {
 	uint8_t mode;
 } t_signal;
 
-t_recv 	*recv(void);//			- Grab the Received Data
-t_data	*data(void);//			- Hold Linked List
+void	sig_one();//					- Hooked Signal 1
+void	sig_two();//					- Hooked Signal 2
+
+t_size	*size(void);//					- Hold the Current size
+t_recv 	*recv(void);//					- Grab the Received Data
+t_data	*data(void);//					- Hold Linked List
+
+char binaryToChar(const char *arr);//	-Convert Binary to Char
 #endif
