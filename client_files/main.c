@@ -17,7 +17,7 @@ void	connect_client(const char *str, int sleep)
 {
 	for (int i = 0; str[i]; i++) {
 		char_to_binary(str[i]);
-		printf("%c = %s\n", data()->input_str[i], data()->binary_str);
+		//printf("%c = %s\n", data()->input_str[i], data()->binary_str);
 
 		for (int j = 0; data()->binary_str[j]; j++) {
 
@@ -26,7 +26,7 @@ void	connect_client(const char *str, int sleep)
 			else
 				kill(data()->process_id, SIGUSR2);
 			
-			printf("Sending: %c\n", data()->binary_str[j]);
+			//printf("Sending: %c\n", data()->binary_str[j]);
 			usleep(sleep);
 		}
 	}
@@ -43,6 +43,7 @@ int main (int argv, char **argc)
 	connect_client("CPID:", 500);
 	connect_client(&data()->clientpid[data()->pidi], 500);
 	connect_client("\\0", 500);
+	printf("Sending %i\n", getpid());
 
 
 

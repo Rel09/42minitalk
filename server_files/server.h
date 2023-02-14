@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <inttypes.h>	// Ubuntu
 
 typedef struct _count {
 	int	count;
