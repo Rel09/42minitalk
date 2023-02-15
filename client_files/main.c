@@ -6,12 +6,16 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 20:30:57 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 21:49:32 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
+t_pid	*data(void) {
+	static t_pid T;
+	return (&T);
+}
 
 void	connect_client(const char *str, int sleep)
 {
@@ -28,26 +32,43 @@ void	connect_client(const char *str, int sleep)
 			usleep(sleep);
 		}
 	}
-	// Send String Terminaison
 }
 
-int main (int argv, char **argc)
+void	await_connect()
 {
+	data()->mode = CONNECTED;
+}
+
+int main(int argv, char **argc)
+{
+	// Parse Input
 	if (!parser(argv, argc))
 		return (0);
 		
 	// Attempt to connect to server
 	connect_client(&data()->clientpid[data()->pidi], 500);
 
-	// Wait for Ping
+	// Wait for Answer from server
+	int tickcount;
+	tickcount = 0;
+	while (data()->mode == UNCONNECTED && tickcount < 300)
+	{
+		signal(SIGUSR1, await_connect);
+		usleep(2000);
+		tickcount++;
+	}
+
+	if (data()->mode == CONNECTED)
+	{
+		printf("Connected Successfully - Sending Data\n");
+
+
+
+		
+	}
+	else
+		printf("Connection Failed - No response from Server\n");
 	
-
-
-
-
-
-
-
 
 	// Send Raw String
 	/*

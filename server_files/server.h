@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:10 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 20:22:07 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 21:52:08 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define UNCONNECTED 0
 # define CONNECTED 1
-# define RECEIVING_DATA 2
+# define WAITING 2
 
 typedef struct _count {
 	int	count;
@@ -42,18 +42,22 @@ typedef struct _signal {
 	int		client_pid;
 }	t_signal;
 
-void		sig_one();//					- Hooked Signal 1
-void		sig_two();//					- Hooked Signal 2
+void		recv_zero();//							- Receiving Data Zero
+void		recv_one();//							- Receiving Data One
 
-void		listen_zero();//				- Listening signal Zero
-void		listen_one();//					- Listening signal One
+void		listen_zero();//						- Listening signal Zero
+void		listen_one();//							- Listening signal One
 
-t_size		*size(void);//					- Hold the Current size
-t_recv 		*recv(void);//					- Grab the Received Data
-t_data		*data(void);//					- Hold Linked List
-t_signal 	*mode(void);//					- Hold the Connection
+void		connect_to_client();//					- Connect to Client
 
-void		end_of_char();//				- When we have received the 8 Binary of the char
+t_size		*size(void);//							- Hold the Current size
+t_recv 		*recv(void);//							- Grab the Received Data
+t_data		*data(void);//							- Hold Linked List
+t_signal 	*mode(void);//							- Hold the Connection
 
-char binaryToChar(const char *arr);//		-Convert Binary to Char
+void		next_char();//							- When we have received the 8 Binary of the char
+void		command(char c);//						- Handle the Command Received
+
+char 		binaryToChar(const char *arr);//		-Convert Binary to Char
+int			ft_atoi(char *s);//						-Convert Str to Int
 #endif

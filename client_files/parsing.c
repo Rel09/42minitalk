@@ -6,13 +6,14 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 10:51:29 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/12 22:35:01 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 20:59:42 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-t_bool	is_numeric(char *s) {
+t_bool	is_numeric(char *s)
+{
 	int	i;
 
 	i = 0;
@@ -24,7 +25,8 @@ t_bool	is_numeric(char *s) {
 	return true;
 }
 
-int	ft_atoi(char *s) {
+int	ft_atoi(char *s)
+{
 	int	i;
 	int num;
 
@@ -37,12 +39,8 @@ int	ft_atoi(char *s) {
 	return (num);
 }
 
-t_pid	*data(void) {
-	static t_pid T;
-	return (&T);
-}
-
-t_bool parser(int argv, char **argc) {
+t_bool parser(int argv, char **argc)
+{
 	if (argv != 3 || !is_numeric(argc[1]))
 		return false;
 	data()->process_id = ft_atoi(argc[1]);

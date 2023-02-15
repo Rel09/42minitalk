@@ -6,18 +6,20 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:42 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 20:32:00 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 21:01:12 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLIENT_H
 # define CLIENT_H
+
 # include <stdio.h>				
 # include <unistd.h>
+# include <stdlib.h>
 # include <signal.h>
 
-# define WAIT 0
-# define RUN 1
+# define UNCONNECTED 0
+# define CONNECTED 1
 
 // Alternative to stdbool					- Bool
 typedef enum _bool {
@@ -44,6 +46,7 @@ typedef struct _pid {
 
 // Secondary Functions
 void	connect_client(const char *str, int sleep);//	- Send PID to Server
+void	await_connect();//								- Wait PING from Server
 
 // Primary Functions
 t_pid	*data(void);//						- Fake Global, Hold Data
