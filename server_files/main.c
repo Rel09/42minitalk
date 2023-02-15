@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:19 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/12 22:48:47 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 20:10:11 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,16 @@ t_size	*size(void)
 	return (&T);
 }
 
+t_signal *mode(void)
+{
+	static t_signal T;
+	return (&T);
+}
+
 int main (void)
 {
 	printf("Server Process ID: [%i]\n", getpid());
+	
 	
 	while (1)
 	{ 

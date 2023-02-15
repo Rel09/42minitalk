@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:10 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/12 22:42:33 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 20:09:52 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <inttypes.h>	// Ubuntu
+//# include <inttypes.h>	// Ubuntu
+
+# define UNCONNECTED 0
+# define CONNECTED 1
+# define RECEIVING_DATA 2
 
 typedef struct _count {
 	int	count;
@@ -35,14 +39,16 @@ typedef struct _recv {
 
 typedef struct _signal {
 	uint8_t mode;
-} t_signal;
+	int		client_pid;
+}	t_signal;
 
-void	sig_one();//					- Hooked Signal 1
-void	sig_two();//					- Hooked Signal 2
+void		sig_one();//					- Hooked Signal 1
+void		sig_two();//					- Hooked Signal 2
 
-t_size	*size(void);//					- Hold the Current size
-t_recv 	*recv(void);//					- Grab the Received Data
-t_data	*data(void);//					- Hold Linked List
+t_size		*size(void);//					- Hold the Current size
+t_recv 		*recv(void);//					- Grab the Received Data
+t_data		*data(void);//					- Hold Linked List
+t_signal 	*mode(void);//					- Hold the Connection
 
-char binaryToChar(const char *arr);//	-Convert Binary to Char
+char binaryToChar(const char *arr);//		-Convert Binary to Char
 #endif
