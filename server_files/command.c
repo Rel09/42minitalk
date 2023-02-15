@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 21:47:11 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 22:01:19 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/15 00:47:30 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ void	next_char()
 void	connect_to_client()
 {
 	uint8_t count;
-	
+	mode()->client_pid = ft_atoi(data()->str);
 	data()->str[data()->i - 1] = '\0';
 	data()->i = 0;
-	printf("Connection Requested by Client: [%s]\n", data()->str);
+	
+	printf("Connection Requested by Client: [%i]\n", mode()->client_pid);
 	
 	// Try to Etablish connection
 	count = 0;
 	while (count < 5) {
 		usleep(2000);
-		kill(ft_atoi(data()->str), SIGUSR1);
+		kill(mode()->client_pid, SIGUSR1);
 		count++;
 	}
 	mode()->mode = CONNECTED;

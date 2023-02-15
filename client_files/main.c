@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 22:32:27 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/15 00:55:29 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,18 @@ int main(int argv, char **argc)
 		usleep(2000);
 		tickcount++;
 	}
-	
+
 	// If the mode is Connected OR waiting
 	if (data()->mode == CONNECTED)
 	{
 		printf("Connected Successfully - Sending Data\n");
-
 		for (int i = 0; data()->input_str[i]; i++) {
+			// Convert this one char to binary
 			char_to_binary(data()->input_str[i]);
-		
-			for (int j = 0; data()->binary_str[j]; j++) {
 			
-				usleep(20000);
+			// Send binary Array one per one
+			for (int j = 0; data()->binary_str[j]; j++) {
 				
-				/*
 				if (data()->binary_str[j] == '0') 
 				{
 					printf("sending 0\n");
@@ -81,13 +79,33 @@ int main(int argv, char **argc)
 					printf("sending 1\n");
 					kill(data()->process_id, SIGUSR2);
 				}
-				
-				// Wait until we receive Ping back
+
 				data()->mode = WAITING;
-				while (data()->mode == WAITING)
+				while (data()->mode == WAITING) {
 					signal(SIGUSR1, await_connect);
-				*/
+					printf("X\n");
+				}		
+			}
+			char_to_binary('#');
 			
+			// Send binary Array one per one
+			for (int j = 0; data()->binary_str[j]; j++) {
+				
+				if (data()->binary_str[j] == '0') 
+				{
+					printf("sending 0\n");
+					kill(data()->process_id, SIGUSR1);
+				}
+				else
+				{
+					printf("sending 1\n");
+					kill(data()->process_id, SIGUSR2);
+				}
+
+				data()->mode = WAITING;
+				while (data()->mode == WAITING) {
+					signal(SIGUSR1, await_connect);
+				}		
 			}
 		}
 		
