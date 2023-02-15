@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:42 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/12 22:35:24 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 20:32:00 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ typedef enum _bool {
 	true
 }	t_bool;
 
-// Struct for get_data						- Hold PID
+// Struct for data				- Hold PID
 typedef struct _pid {
 	t_bool 	mode;// 			- Sending Mode
 	
 	int 	pidi;//				- Index of Process PID
-	char 	clientpid[11];//	- This Process PID
+	char 	clientpid[12];//	- This Process PID
 	
 	int		process_id;//		- Entered PID
 	char	*input_str;//		- Entered STRING

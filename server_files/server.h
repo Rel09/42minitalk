@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:10 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 20:09:52 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 20:22:07 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,15 @@ typedef struct _signal {
 void		sig_one();//					- Hooked Signal 1
 void		sig_two();//					- Hooked Signal 2
 
+void		listen_zero();//				- Listening signal Zero
+void		listen_one();//					- Listening signal One
+
 t_size		*size(void);//					- Hold the Current size
 t_recv 		*recv(void);//					- Grab the Received Data
 t_data		*data(void);//					- Hold Linked List
 t_signal 	*mode(void);//					- Hold the Connection
+
+void		end_of_char();//				- When we have received the 8 Binary of the char
 
 char binaryToChar(const char *arr);//		-Convert Binary to Char
 #endif

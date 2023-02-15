@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:19 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 20:10:11 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 20:22:47 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ t_signal *mode(void)
 int main (void)
 {
 	printf("Server Process ID: [%i]\n", getpid());
+	mode()->mode = UNCONNECTED;
 	
-	
-	while (1)
+	while (mode()->mode == UNCONNECTED)
 	{ 
-		signal(SIGUSR1, sig_one);
-		signal(SIGUSR2, sig_two);
+		signal(SIGUSR1, listen_zero);
+		signal(SIGUSR2, listen_one);
 	}
 	return 0;
 }
