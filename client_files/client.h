@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:42 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 21:01:12 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 22:02:28 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define UNCONNECTED 0
 # define CONNECTED 1
+# define WAITING 2
 
 // Alternative to stdbool					- Bool
 typedef enum _bool {

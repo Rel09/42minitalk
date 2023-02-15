@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:19 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 21:51:37 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 22:31:40 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ t_signal *mode(void)
 
 int main (void)
 {
-	printf("Server Listening @ Process ID: [%i]\n", getpid());
-	
 	while (1)
 	{
+		printf("Server Listening: [%i]\n", getpid());
+		
 		// Wait for a connection
 		while (mode()->mode == UNCONNECTED)
 		{ 
@@ -50,12 +50,14 @@ int main (void)
 			signal(SIGUSR2, listen_one);
 		}
 
+		// Reset String
+		data()->i = 0;
+
 		// If we're Connected / Waiting for data response
 		while (mode()->mode == CONNECTED || mode()->mode == WAITING)
 		{
 			signal(SIGUSR1, recv_zero);
 			signal(SIGUSR2, recv_one);
-			printf("Connected\n");
 		}
 		
 	}

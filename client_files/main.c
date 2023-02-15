@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/14 21:49:32 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/14 22:32:27 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,37 +57,43 @@ int main(int argv, char **argc)
 		usleep(2000);
 		tickcount++;
 	}
-
+	
+	// If the mode is Connected OR waiting
 	if (data()->mode == CONNECTED)
 	{
 		printf("Connected Successfully - Sending Data\n");
 
-
-
+		for (int i = 0; data()->input_str[i]; i++) {
+			char_to_binary(data()->input_str[i]);
+		
+			for (int j = 0; data()->binary_str[j]; j++) {
+			
+				usleep(20000);
+				
+				/*
+				if (data()->binary_str[j] == '0') 
+				{
+					printf("sending 0\n");
+					kill(data()->process_id, SIGUSR1);
+				}
+				else
+				{
+					printf("sending 1\n");
+					kill(data()->process_id, SIGUSR2);
+				}
+				
+				// Wait until we receive Ping back
+				data()->mode = WAITING;
+				while (data()->mode == WAITING)
+					signal(SIGUSR1, await_connect);
+				*/
+			
+			}
+		}
 		
 	}
 	else
 		printf("Connection Failed - No response from Server\n");
 	
-
-	// Send Raw String
-	/*
-	for (int i = 0; data()->input_str[i]; i++) {
-		char_to_binary(data()->input_str[i]);
-		printf("%c = %s\n", data()->input_str[i], data()->binary_str);
-
-		for (int j = 0; data()->binary_str[j]; j++) {
-
-			if (data()->binary_str[j] == '0') 
-				kill(data()->process_id, SIGUSR1);
-			else
-				kill(data()->process_id, SIGUSR2);
-			
-			printf("Sending: %c\n", data()->binary_str[j]);
-			usleep(1);	
-			// Add Pong Here
-		}
-	}
-	*/
 	return 0;
 }
