@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/20 03:24:32 by dpotvin          ###   ########.fr       */
+/*   Created: 2023/02/20 00:30:32 by dpotvin           #+#    #+#             */
+/*   Updated: 2023/02/20 03:24:06 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-t_data *get_data() {
-	static t_data T;
-	return (&T);
+int	ft_atoi(char *s)
+{
+	int	i;
+	int num;
+
+	i = 0;
+	num = 0;
+	while (s[i] && ((s[i] >= 9 && s[i] <= 13) || (s[i] == 32)))
+		i++;
+	while (s[i] && s[i] >= '0' && s[i] <= '9') {
+		num = num * 10 + (s[i] - '0');
+		i++;
+	}
+	return num;
 }
 
-int main(int argv, char **argc)
+void char_to_binary(char c)
 {
-	if (argv != 3) {
-		printf("Wrong input\n");
-		return (1);
+	for (int j = 7; j >= 0; --j)
+    {
+        if (c & (1 << j))
+			kill(get_data()->server_id, SIGUSR2);
+		else
+			kill(get_data()->server_id, SIGUSR1);
+		usleep(500);
 	}
-
-	get_data()->server_id = ft_atoi(argc[1]);
-	for (int i = 0; argc[2][i]; i++) {
-		char_to_binary(argc[2][i]);
-	}
-	char_to_binary('\0');
-	return (0);
 }
