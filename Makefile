@@ -5,7 +5,7 @@ FLAG = -Wall -Wextra -Werror
 ############################################################################
 ################################### Main ###################################
 NAME = server
-FILES :=	main tools sighandler command
+FILES :=	main
 
 SRCS_DIR = ./server_files/
 OBJS_DIR = ./s_obj/
@@ -13,7 +13,7 @@ OBJS_DIR = ./s_obj/
 ############################################################################
 ################################## Bonus ###################################
 BONUS_NAME = client
-BONUS_FILE :=	main parsing send
+BONUS_FILE :=	main
 
 BONUS_DIR = ./client_files/
 BONUS_OBJS_DIR = ./c_obj/
@@ -26,9 +26,9 @@ RED="\033[1;31m";
 CYAN="\033[1;36m"
 GREEN="\033[1;32m"
 ENDCOLOR="\033[0m"
-CLEANING := $(GREEN)___ Cleaning Completed ___$(ENDCOLOR)
-SUCCESS := $(GREEN)___ [$(NAME)] Successfully Compiled! ___$(ENDCOLOR)
-BONUS_SUCCESS := $(GREEN)___ [$(BONUS_NAME)] Bonus Successfully Compiled! ___$(ENDCOLOR)
+CLEANING := $(GREEN)[+] Cleaning Completed$(ENDCOLOR)
+SUCCESS := $(GREEN)[+] $(NAME) Successfully Compiled!$(ENDCOLOR)
+BONUS_SUCCESS := $(GREEN)[+] $(BONUS_NAME) Successfully Compiled!$(ENDCOLOR)
 ############################ Compilation Main ###############################
 #SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
@@ -41,7 +41,7 @@ $(NAME): $(OBJS)
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(FLAG) -c $< -o $@
-	@echo $(CYAN)[Compiling]: $@$(ENDCOLOR)
+	@echo $(CYAN)[-] Compiling: $@$(ENDCOLOR)
 ########################### Compilation Bonus ###############################
 BONUS_OBJS = $(addprefix $(BONUS_OBJS_DIR), $(addsuffix .o, $(BONUS_FILE)))
 client: $(BONUS_NAME)
@@ -53,7 +53,7 @@ $(BONUS_NAME): $(BONUS_OBJS)
 $(BONUS_OBJS_DIR)%.o: $(BONUS_DIR)%.c
 	@mkdir -p $(BONUS_OBJS_DIR)
 	@$(CC) $(FLAG) -c $< -o $@
-	@echo $(CYAN)[Compiling Bonus]: $@$(ENDCOLOR)
+	@echo $(CYAN)[-] Compiling Bonus: $@$(ENDCOLOR)
 
 ################################# Cleaning ##################################
 clean:
