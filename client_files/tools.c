@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:30:32 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/20 03:24:06 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/21 02:10:51 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void char_to_binary(char c)
 			kill(get_data()->server_id, SIGUSR2);
 		else
 			kill(get_data()->server_id, SIGUSR1);
-		usleep(500);
+		usleep(250);
 	}
 }

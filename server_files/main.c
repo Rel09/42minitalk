@@ -6,11 +6,20 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:19 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/20 04:55:26 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/21 03:41:58 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
+
+void	ft_writestr(char *s) {
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	write(1, s, 100);
+}
 
 void	add_char_to_str() {
 	static t_str* T;
@@ -22,39 +31,46 @@ void	add_char_to_str() {
 	T->str[index++] = binary_to_char(get_bin()->str);
 	get_bin()->i = 0;
 
+	// If we're at the end of the string
 	if (index == 99)
 	{
 		T->str[99] = '\0';
 		T = get_str(INIT_NEXT);
 		index = 0;
 	}
+
+		// End of Received String
+	if (T->str[index - 1] == 0)
+	{
+		t_str* T = get_str(NONE);
+		t_str* next;
+		
+		while (T)  {
+			next = T->next;
+			ft_writestr(T->str);
+			ft_writestr("\n");
+			T = 0;
+			free(T);
+			T = next;
+		}
+		index = 0;
+	}
+
+
+
+
+	
 }
 
 char binary_to_char(const char *arr)
 {
-    int i;
-    char result;
-	t_str* temp;
-	t_str* old;
+    int		i;
+    char	result;
 	
 	result = 0;
     for (i = 0; i < 8; i++) {
         result = result * 2 + (arr[i] - '0');
     }
-	
-	// End of Received String
-	// Bug is happening here ser
-	if (result == 0)
-	{
-		printf("Doing stuff\n");
-
-		temp = get_str(NONE);
-		while (temp) {
-			printf("%s", temp->str);
-			temp = temp->next;
-		}
-		
-	}
     return result;
 }
 
@@ -105,41 +121,39 @@ t_binary	*get_bin() {
 	return (&T);
 }
 
-t_str		*get_str(uint8_t mode) {
-	static t_str *head;
-	static t_str *current;
-	
-	if (!head)
-		head = malloc(sizeof(t_str*));
-
-	if (mode == INIT_NEXT) {
-		if (!current) {
-			printf("\nFirst Malloc\n");
-			head->next = malloc(sizeof(t_str*));
-			current = head->next;
-		}
-		else {
-			printf("\nNext\n");
-			current->next = malloc(sizeof(t_str*));
-			current = current->next;
-		}
+t_str *get_str(uint8_t mode)
+{
+    static t_str *head;
+    static t_str *current;
+    
+    if (!head) {
+        head = malloc(sizeof(t_str));
+        if (!head) 
+            return (0);
+        current = head;
+    }
+    
+    if (mode == INIT_NEXT) {
+        current->next = malloc(sizeof(t_str));
+        if (!current->next)
+			return (0);
+        current = current->next;
+        current->next = 0;
+        return current;
+    }
+	else if (mode == GET_CURRENT)
 		return (current);
-	}
 		
 	return (head);
 }
 
+
 int main (void)
 {
 	printf("Server PID: %i\n", getpid());
-	
 	if (!get_structs(INIT_ZERO) || !get_structs(INIT_ONE))
-	{
-		printf("Error Initializing Signals\n");
-		return (1);
-	}
-	while (1) {
+		return (errormsg(1));
+	while (1) 
 		usleep(1);
-	}
 	return 0;
 }
