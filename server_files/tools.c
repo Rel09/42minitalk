@@ -6,17 +6,37 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:13:59 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/23 04:25:28 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/23 06:44:41 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
+void	ft_writestr(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	write(1, s, i);
+}
+
 void	add_char_to_str(void)
 {
-	get_headstr(ADD_CHAR, binary_to_char(get_bin()->str));
+	char this_char;
+	
+	this_char = binary_to_char(get_bin()->str);
+	get_headstr(ADD_CHAR, this_char);
 	get_bin()->i = 0;
-	if (binary_to_char(get_bin()->str) == 0)
+	
+	// If this is the Client ProcessID
+	if (this_char == 0 && ft_strstr(get_headstr(RETURN_STR, 0)->str, "#ID#"))
+	{
+		printf("Received ID: [%s]\n", get_headstr(RETURN_STR, 0)->str);
+		get_headstr(FREE_ALL, 0);
+	}
+	else if (this_char == 0)
 	{
 		get_headstr(PRINT_ALL, 0);
 		get_headstr(FREE_ALL, 0);
