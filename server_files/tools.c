@@ -5,37 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 00:30:32 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/22 23:36:38 by dpotvin          ###   ########.fr       */
+/*   Created: 2023/02/22 22:13:59 by dpotvin           #+#    #+#             */
+/*   Updated: 2023/02/22 23:37:48 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "server.h"
 
-int	ft_atoi(char *s)
+void	add_char_to_str() {
+	get_headstr(ADD_CHAR, binary_to_char(get_bin()->str));
+	get_bin()->i = 0;
+
+	// End of Received String
+	if (binary_to_char(get_bin()->str) == 0)
+	{
+		get_headstr(PRINT_ALL, 0);
+		get_headstr(FREE_ALL, 0);
+	}
+}
+
+char binary_to_char(const char *arr)
 {
-	int	i;
-	int num;
-
+    int		i;
+    char	result;
+	
 	i = 0;
-	num = 0;
-	while (s[i] && ((s[i] >= 9 && s[i] <= 13) || (s[i] == 32)))
-		i++;
-	while (s[i] && s[i] >= '0' && s[i] <= '9') {
-		num = num * 10 + (s[i] - '0');
-		i++;
-	}
-	return num;
+	result = 0;
+	while (i < 8)
+        result = result * 2 + (arr[i++] - '0');
+    return result;
 }
 
-void char_to_binary(char c)
-{
-	for (int j = 7; j >= 0; --j)
-    {
-        if (c & (1 << j))
-			kill(get_data()->server_id, SIGUSR2);
-		else
-			kill(get_data()->server_id, SIGUSR1);
-		usleep(30);
-	}
-}

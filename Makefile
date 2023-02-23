@@ -5,7 +5,7 @@ FLAG = -Wall -Wextra -Werror
 ############################################################################
 ################################### Main ###################################
 NAME = server
-FILES :=	main error
+FILES :=	main error tools functions
 
 SRCS_DIR = ./server_files/
 OBJS_DIR = ./s_obj/
