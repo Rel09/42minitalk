@@ -6,17 +6,16 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:13:59 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/22 23:37:48 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/23 04:25:28 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 
-void	add_char_to_str() {
+void	add_char_to_str(void)
+{
 	get_headstr(ADD_CHAR, binary_to_char(get_bin()->str));
 	get_bin()->i = 0;
-
-	// End of Received String
 	if (binary_to_char(get_bin()->str) == 0)
 	{
 		get_headstr(PRINT_ALL, 0);
@@ -24,15 +23,55 @@ void	add_char_to_str() {
 	}
 }
 
-char binary_to_char(const char *arr)
+char	binary_to_char(const char *arr)
 {
-    int		i;
-    char	result;
-	
+	int		i;
+	char	result;
+
 	i = 0;
 	result = 0;
 	while (i < 8)
-        result = result * 2 + (arr[i++] - '0');
-    return result;
+		result = result * 2 + (arr[i++] - '0');
+	return (result);
 }
 
+void	add_to_str(t_str *T, uint8_t *i, char c)
+{
+	t_str	*temp;
+
+	temp = T;
+	while (temp->next)
+		temp = temp->next;
+	temp->str[(*i)++] = c;
+	if (*i == 99)
+	{
+		temp->next = malloc(sizeof(t_str));
+		temp = temp->next;
+		temp->next = 0;
+		*i = 0;
+	}
+}
+
+void	free_all(t_str **T, uint8_t *i)
+{
+	t_str	*temp;
+
+	while (*T)
+	{
+		temp = (*T)->next;
+		free(*T);
+		*T = temp;
+	}
+	*T = 0;
+	*i = 0;
+}
+
+void	print_all(t_str *T)
+{
+	while (T)
+	{
+		printf("%s", T->str);
+		T = T->next;
+	}
+	printf("\n");
+}

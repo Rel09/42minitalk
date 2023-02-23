@@ -5,7 +5,7 @@ FLAG = -Wall -Wextra -Werror
 ############################################################################
 ################################### Main ###################################
 NAME = server
-FILES :=	main error tools functions
+FILES :=	main tools functions
 
 SRCS_DIR = ./server_files/
 OBJS_DIR = ./s_obj/
@@ -44,10 +44,10 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@echo $(CYAN)[-] Compiling: $@$(ENDCOLOR)
 ########################### Compilation Bonus ###############################
 BONUS_OBJS = $(addprefix $(BONUS_OBJS_DIR), $(addsuffix .o, $(BONUS_FILE)))
-client: $(BONUS_NAME)
+bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_OBJS)
-	$(CC) $(FLAG) $(BONUS_OBJS) -o $(BONUS_NAME)
+	@$(CC) $(FLAG) $(BONUS_OBJS) -o $(BONUS_NAME)
 	@echo $(BONUS_SUCCESS)
 
 $(BONUS_OBJS_DIR)%.o: $(BONUS_DIR)%.c

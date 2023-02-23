@@ -6,28 +6,38 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/20 03:24:32 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/23 04:28:06 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "client.h"
 
-t_data *get_data() {
-	static t_data T;
-	return (&T);
+t_data	*get_data(void)
+{
+	static t_data	t;
+
+	return (&t);
 }
 
-int main(int argv, char **argc)
+int	main(int argv, char **argc)
 {
-	if (argv != 3) {
-		printf("Wrong input\n");
-		return (1);
-	}
+	int	i;
 
+	if (argv != 3 || !is_numeric(argc[1]))
+		return (errormsg());
 	get_data()->server_id = ft_atoi(argc[1]);
-	for (int i = 0; argc[2][i]; i++) {
-		char_to_binary(argc[2][i]);
-	}
+	i = 0;
+	while (argc[2][i])
+		char_to_binary(argc[2][i++]);
 	char_to_binary('\0');
 	return (0);
 }
+// Bunch of emojis to test
+/*
+👋🌎🌞🌻🍔🎉🎓💰🎁🎄🎃🐶🐱🦁🐵🐻🦊🐯🐮🐷🦄🐙🐬🐠🦐🍕🍩🍺🍸🍹🚀🚲🚁🚗🚊🏰🗽💻📱🎧🎬🎨🏀
+⚽️🎲🎮🎤🎹🎸🚣‍♀️🚴‍♀️🏊‍♂️🏋️‍♂️🚶‍♂️🏃‍♀️🎭🎬🎥🎫🎟️🎭🎯🎳🎰🎳🎿🎾🎱🎲🎮🃏🀄️🎴🎭🎫🎟️🎙️🎚️🎛️🕰️🕯️🛍️💄👠👒👑
+👓👜👛🧢🧣👔👕👖🧥👗👘👙👚👞👟🥾🥿👡🩰🥼🦺🧤🧦🧥👙🧢🎓🎩🧢🎓🎒👝💼👜👛🎁🎀🎊🎉🎈🎂🍰🧁
+🍭🍬🍫🍩🍪🍕🍔🍟🌭🌮🌯🍲🍛🍜🍝🍠🥔🥕🥦🍆🍅🥒🌶️🥑🥬🥝🍓🍇🍉🍊🍌🍍🥭🥥🥜🌰🍯🍞🧀🥐🥖🥨🥯
+🍳🍔🍕🍟🍗🥩🥓🍖🌭🍞🥪🥙🥚🥞🧇🥓🍟🥤🍹🍺🍷🍾🥂🍸🥃🍻🥛🍼🥤🧃🧉🥢🍽️🍴🥄🏺🎁🎂🎊🎉🎈🎆🎇
+🎃🎄🎅🎁🎍🎑🎏🎉🎈🎁🎂🎊🎃🎄🎇🎆🎁🎉🎋🎎🎏🎐🎑🎌🏮
+*/
