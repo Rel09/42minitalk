@@ -20,3 +20,5 @@ This Project also handle the Bonus @ 42
   - Works with Emoji
   - Server send Ping on Message Received
 ```
+
+![alt text](https://i.imgur.com/LxUCS71.png)
