@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 09:55:38 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/24 23:50:05 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/24 23:57:15 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_copystr(char *str, char *tocopy)
 
 int	main(int argv, char **argc)
 {
+	int		count;
 	char	buffer[16];
 
 	if (argv != 3 || !is_numeric(argc[1]))
@@ -60,8 +61,16 @@ int	main(int argv, char **argc)
 		printf("Problem with Sigaction\n");
 		return (0);
 	}
+	count = 0;
 	while (get_data()->waiting)
+	{
 		usleep(1);
+		count++;
+		if (count > 500000){
+			printf("No response from Server\n");
+			break;
+		}
+	}
 	return (0);
 }
 // Bunch of emojis to test
