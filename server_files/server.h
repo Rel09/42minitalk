@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:11:10 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/23 06:42:25 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/24 23:34:37 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ typedef struct _data {
 	int	clientpid;
 }	t_data;
 
-t_data				*get_pid();
+t_data				*get_pid(void);
 t_binary			*get_bin(void);
-void				add_char_to_str(void);
+int					ft_atoi(char *s);
 void				print_all(t_str *T);
+void				add_char_to_str(void);
 uint8_t				errormsg(uint8_t err_no);
 struct sigaction	*get_structs(uint8_t mode);
 void				free_all(t_str **T, uint8_t *i);

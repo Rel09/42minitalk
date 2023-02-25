@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:13:59 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/23 06:44:41 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/24 23:46:17 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,25 @@ void	ft_writestr(char *s)
 
 void	add_char_to_str(void)
 {
-	char this_char;
-	
+	char	this_char;
+	char	*t;
+
 	this_char = binary_to_char(get_bin()->str);
 	get_headstr(ADD_CHAR, this_char);
 	get_bin()->i = 0;
-	
-	// If this is the Client ProcessID
 	if (this_char == 0 && ft_strstr(get_headstr(RETURN_STR, 0)->str, "#ID#"))
 	{
-		printf("Received ID: [%s]\n", get_headstr(RETURN_STR, 0)->str);
+		t = &get_headstr(RETURN_STR, 0)->str[4];
+		get_pid()->clientpid = ft_atoi(t);
 		get_headstr(FREE_ALL, 0);
 	}
 	else if (this_char == 0)
 	{
 		get_headstr(PRINT_ALL, 0);
 		get_headstr(FREE_ALL, 0);
+		usleep(100);
+		kill(get_pid()->clientpid, SIGUSR1);
+		get_pid()->clientpid = 0;
 	}
 }
 
@@ -84,14 +87,4 @@ void	free_all(t_str **T, uint8_t *i)
 	}
 	*T = 0;
 	*i = 0;
-}
-
-void	print_all(t_str *T)
-{
-	while (T)
-	{
-		printf("%s", T->str);
-		T = T->next;
-	}
-	printf("\n");
 }

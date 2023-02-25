@@ -6,7 +6,7 @@
 /*   By: dpotvin <dpotvin@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:30:32 by dpotvin           #+#    #+#             */
-/*   Updated: 2023/02/23 04:02:37 by dpotvin          ###   ########.fr       */
+/*   Updated: 2023/02/24 23:37:44 by dpotvin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@ int	ft_atoi(char *s)
 		i++;
 	}
 	return (num);
+}
+
+void	ft_itoa(int i, char *buffer)
+{
+	char	temp[16];
+	char	*index;
+
+	(void)buffer;
+	index = &temp[15];
+	temp[15] = '\0';
+	while (i > 9)
+	{
+		*--index = (i % 10) + '0';
+		i = i / 10;
+	}
+	*--index = (i % 10) + '0';
+	add_code("#ID#", index);
+	ft_copystr(buffer, index - ft_strlen("#ID#"));
 }
 
 void	char_to_binary(char c)
@@ -57,10 +75,4 @@ t_bool	is_numeric(char *s)
 		i++;
 	}
 	return (true);
-}
-
-uint8_t	errormsg(void)
-{
-	printf("Invalid Input\n");
-	return (1);
 }
